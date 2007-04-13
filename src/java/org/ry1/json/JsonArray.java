@@ -20,5 +20,8 @@ public class JsonArray implements Json {
 		
 		return builder.toString();
 	}
-
+	
+	public ArrayList<Object> getList() {
+		return list;
+	}
 }

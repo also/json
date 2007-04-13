@@ -48,7 +48,7 @@ class JsonReader {
 	
 	private void require(char c) {
 		if (currentChar != c) {
-			throw new JsonFormatException();
+			throw new JsonFormatException(c + " required at " + it.getIndex());
 		}
 		next();
 	}
@@ -135,6 +135,7 @@ class JsonReader {
 				value = read();
 			}
 		}
+		next();
 		return result;
 	}
 
