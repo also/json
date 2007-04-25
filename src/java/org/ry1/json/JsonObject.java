@@ -92,6 +92,32 @@ public class JsonObject implements Json {
 		return map.get(name);
 	}
 	
+	public JsonObject getJson(String name) {
+		Object value = map.get(name);
+		return value instanceof JsonObject ? (JsonObject) value : null;
+	}
+	
+	public String getString(String name) {
+		Object value = map.get(name);
+		return value != null ? value.toString() : null;
+	}
+	
+	public JsonArray getArray(String name) {
+		Object value = map.get(name);
+		return value instanceof JsonArray ? (JsonArray) value : null;
+	}
+	
+	public Integer getInteger(String name) {
+		Object value = map.get(name);
+		if (value instanceof Number) {
+			return new Integer(((Number) value).intValue());
+			
+		}
+		else {
+			return null;
+		}
+	}
+	
 	public JsonObject set(String name, Object value) {
 		map.put(name, value);
 		return this;
