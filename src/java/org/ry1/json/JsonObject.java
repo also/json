@@ -118,6 +118,11 @@ public class JsonObject implements Json {
 		}
 	}
 	
+	public Boolean getBoolean(String name) {
+		Object value = map.get(name);
+		return value instanceof Boolean ? (Boolean) value : null;
+	}
+	
 	public JsonObject set(String name, Object value) {
 		map.put(name, value);
 		return this;
