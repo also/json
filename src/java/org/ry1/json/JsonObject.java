@@ -30,7 +30,7 @@ public class JsonObject implements Json {
 	
 	public JsonObject(Object bean, String... propertyNames) {
 		try {
-			Class beanClass = bean.getClass();
+			Class<?> beanClass = bean.getClass();
 			for (String propertyName : propertyNames) {
 				Method getter = beanClass.getMethod("get" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1), (Class[]) null);
 				set(propertyName, getter.invoke(bean, (Object[]) null));
@@ -43,7 +43,7 @@ public class JsonObject implements Json {
 	
 	public JsonObject(Object bean, PropertyList propertyList) {
 		try {
-			Class beanClass = bean.getClass();
+			Class<?> beanClass = bean.getClass();
 			for (PropertyListElement propertyListElement : propertyList.getElements()) {
 				String propertyName = propertyListElement.propertyName;
 				Method getter = beanClass.getMethod("get" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1), (Class[]) null);
@@ -55,7 +55,7 @@ public class JsonObject implements Json {
 					if (propertyListElement.list) {
 						// list property
 						JsonArray array = new JsonArray();
-						Iterable propertyIterable = property.getClass().isArray() ? Arrays.asList((Object[]) property) : (Iterable) property;
+						Iterable<?> propertyIterable = property.getClass().isArray() ? Arrays.asList((Object[]) property) : (Iterable<?>) property;
 						
 						if (propertyListElement.propertyList != null) {
 							for (Object element : propertyIterable) {

@@ -26,7 +26,7 @@ public final class JsonBuilder {
 		 || value instanceof Number
 		 || value instanceof Boolean) appendPlain(value);
 		else if (value.getClass().isArray()) appendArray(value);
-		else if (value instanceof Iterable) appendIterable((Iterable) value);
+		else if (value instanceof Iterable) appendIterable((Iterable<?>) value);
 		else if (value instanceof Map) appendMap((Map) value);
 		else if (value instanceof Json) appendJson((Json) value);
 		else appendString(value);
