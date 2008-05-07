@@ -1,3 +1,5 @@
+/* $Id$ */
+
 package org.ry1.json;
 
 import java.text.CharacterIterator;

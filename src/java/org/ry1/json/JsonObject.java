@@ -1,3 +1,5 @@
+/* $Id$ */
+
 package org.ry1.json;
 
 import java.beans.BeanInfo;
@@ -7,7 +9,6 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
-import org.ry1.json.PropertyList.PropertyListElement;
 
 public class JsonObject implements Json {
 	private LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
@@ -46,12 +47,20 @@ public class JsonObject implements Json {
 			Class<?> beanClass = bean.getClass();
 			for (PropertyListElement propertyListElement : propertyList.getElements()) {
 				String propertyName = propertyListElement.propertyName;
-				Method getter = beanClass.getMethod("get" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1), (Class[]) null);
-				Object property = getter.invoke(bean, (Object[]) null);
+				Object property;
+				if (propertyName != null) {
+					Method getter = beanClass.getMethod("get" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1), (Class[]) null);
+					property = getter.invoke(bean, (Object[]) null);
+				}
+				else {
+					property = bean;
+				}
 				
 				Object value = property;
 				
 				if (property != null) {
+					value = property = propertyListElement.transformer.transform(property);
+					
 					if (propertyListElement.list) {
 						// list property
 						JsonArray array = new JsonArray();
@@ -76,7 +85,7 @@ public class JsonObject implements Json {
 					}
 				}
 
-				set(propertyName, value);
+				set(propertyListElement.targetName, value);
 			}
 		}
 		catch (Exception ex) {

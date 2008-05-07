@@ -11,7 +11,7 @@ import java.util.List;
  *
  */
 public class PropertyList {
-	private ArrayList<PropertyListElement> elements = new ArrayList<PropertyListElement>();
+	private List<PropertyListElement> elements = new ArrayList<PropertyListElement>();
 	
 	/** Adds the named value to the list of properties.
 	 */
@@ -32,7 +32,7 @@ public class PropertyList {
 	/** Adds the named bean and the bean's properties to the list of properties.
 	 */
 	public PropertyList includeBean(String propertyName, PropertyList propertyList) {
-		elements.add(new PropertyListElement(propertyName, propertyList, false));
+		elements.add(new PropertyListElement(propertyName, propertyName, null, propertyList, false));
 		return this;
 	}
 	
@@ -56,7 +56,7 @@ public class PropertyList {
 	 * @return
 	 */
 	public PropertyList includeListOfBeans(String propertyName, PropertyList propertyList) {
-		elements.add(new PropertyListElement(propertyName, propertyList, true));
+		elements.add(new PropertyListElement(propertyName, propertyName, null, propertyList, true));
 		return this;
 	}
 	
@@ -68,19 +68,11 @@ public class PropertyList {
 		return propertyList;
 	}
 	
-	List<PropertyListElement> getElements() {
+	public List<PropertyListElement> getElements() {
 		return Collections.unmodifiableList(elements);
 	}
 	
-	static class PropertyListElement {
-		public final boolean list;
-		public final String propertyName;
-		public final PropertyList propertyList;
-		
-		public PropertyListElement(String propertyName, PropertyList propertyList, boolean list) {
-			this.propertyName = propertyName;
-			this.propertyList = propertyList;
-			this.list = list;
-		}
+	public void setElements(List<PropertyListElement> elements) {
+		this.elements = elements;
 	}
 }
