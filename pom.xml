@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- $Id$ -->
+
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ryanberdeen</groupId>
+	<artifactId>json</artifactId>
+	<packaging>jar</packaging>
+	<name>json library</name>
+	<version>0.1-SNAPSHOT</version>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.5</source>
+						<target>1.5</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
